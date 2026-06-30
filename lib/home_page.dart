@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_utilization/auth_service.dart';
 import 'package:firebase_utilization/crud_service.dart';
+import 'package:firebase_utilization/login.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -16,6 +18,18 @@ class HomePage extends StatelessWidget {
         centerTitle: true,
         title: const Text("FIREBASE CRUD | ESCOBIDO"),
         backgroundColor: Colors.greenAccent.shade200,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: () {
+              AuthService().signOut();
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => LoginPage()),
+              );
+            },
+          )
+        ]
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.greenAccent.shade200,

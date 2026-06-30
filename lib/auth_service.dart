@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class AuthService {
     final FirebaseAuth _auth = FirebaseAuth.instance;
-    final GoogleSignIn _googleSignIn = kIsWeb ? null : GoogleSignIn();
+    final GoogleSignIn? _googleSignIn = kIsWeb ? null : GoogleSignIn.instance;
 
     //GOOGLE SIGN IN
     Future<User?> signInWithGoogle() async {
@@ -33,9 +33,9 @@ class AuthService {
     }
 
     // EMAIL/PASSWORD REGISTER
-    Future<User!> registerWithEmail(String email, String password) async {
+    Future<User?> registerWithEmail(String email, String password) async {
         try {
-            final userCredential - await _auth.createUserWithEmailAndPassword(
+            final userCredential = await _auth.createUserWithEmailAndPassword(
                 email: email,
                 password: password
             );
